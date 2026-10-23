@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    READING ROOM 2.0 — THE CONSTELLATION (branch-only prototype)
+    Four pieces of evidence from four notebooks, placed near one another.
+    No interpretation. No explanation. Only proximity. The question arrives last.
+    No navigation, no links, no analytics, no storage.
+
+    Sources (verbatim from the live site's repository, modern-dharma-site @ 64cd451):
+      Book        — assets/process.pdf, Chapter 5 · Process (published sample chapter)
+      Journal     — _data/journal.yml, field observation, Mount Athos
+      Reader      — map/index.html, evidence #9, Reader · Mumbai
+                    (UNVERIFIED: the /map/ prototype may hold placeholder entries;
+                    replace with a real, permissioned submission before showing anyone)
+      Field Note  — map/index.html, evidence #7, Field Note · Luxembourg garden
+      Question    — the site's recurring question (homepage footer, inquiry cycle)
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Modern Dharma</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* Tokens copied from moderndharma.life style.css */
+    :root {
+      --black: #0b0b0b;
+      --gold: #caa33c;
+      --ivory: #f0ece3;
+      --muted: #aaa59a;
+
+      --step: 2800ms;      /* between one piece of evidence and the next */
+    }
+    @media (prefers-reduced-motion: reduce) { :root { --step: 0ms; } }
+
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      background: var(--black);
+      color: var(--ivory);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      padding: 10vh 6vw;
+      display: grid;
+      place-items: center;
+    }
+
+    /* Four pieces around an empty centre, at uneven distances. */
+    .constellation {
+      width: min(1100px, 100%);
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-template-rows: auto auto auto;
+      row-gap: clamp(2.5rem, 7vh, 5rem);
+      column-gap: 1.5rem;
+    }
+    .book    { grid-column: 1 / 6;   grid-row: 1; align-self: start; }
+    .journal { grid-column: 8 / 13;  grid-row: 1; align-self: end; margin-top: 7rem; }
+    .field   { grid-column: 2 / 6;   grid-row: 3; align-self: start; margin-top: -1rem; }
+    .reader  { grid-column: 7 / 12;  grid-row: 3; align-self: start; margin-top: 3.5rem; }
+    .question{ grid-column: 3 / 11;  grid-row: 2; }
+
+    .evidence { display: grid; gap: 1.4rem; }
+    .evidence blockquote {
+      font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+      line-height: 1.34;
+      font-weight: 400;
+    }
+    .evidence .image {
+      display: block;
+      margin-top: .8rem;
+      color: var(--muted);
+      font-style: italic;
+      font-size: .8em;
+      line-height: 1.45;
+    }
+    .source {
+      font-family: "Inter", Arial, sans-serif;
+      font-size: .6rem;
+      font-weight: 500;
+      letter-spacing: .2em;
+      line-height: 1.9;
+      text-transform: uppercase;
+      color: rgba(202, 163, 60, .7);
+    }
+    .source b { display: block; font-weight: 500; color: var(--gold); }
+
+    .question {
+      text-align: center;
+      font-weight: 500;
+      font-size: clamp(1.9rem, 3.6vw, 2.8rem);
+      line-height: 1.1;
+      padding: 1rem 0;
+    }
+
+    /* Each piece arrives on its own, in a different part of the field.
+       Sources follow their words. The question comes last, after a longer silence. */
+    .arrive { opacity: 0; transform: translateY(6px); animation: arrive 2.2s ease forwards; }
+    .s1 { animation-delay: .6s; }
+    .s2 { animation-delay: calc(.6s + var(--step)); }
+    .s3 { animation-delay: calc(.6s + var(--step) * 2); }
+    .s4 { animation-delay: calc(.6s + var(--step) * 3); }
+    .src { animation-delay: calc(1.8s + var(--step) * 4); }
+    .last { animation-delay: calc(3s + var(--step) * 5.2); }
+    @keyframes arrive { to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      .arrive { animation: none; opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 760px) {
+      body { place-items: start center; padding: 12vh 1.4rem 10vh; }
+      .constellation { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: 3.2rem; }
+      .book    { grid-column: 1 / 6; grid-row: 1; margin: 0; }
+      .journal { grid-column: 2 / 7; grid-row: 2; margin: 0; }
+      .field   { grid-column: 1 / 6; grid-row: 3; margin: 0; }
+      .reader  { grid-column: 2 / 7; grid-row: 4; margin: 0; }
+      .question{ grid-column: 1 / 7; grid-row: 5; text-align: left; margin-top: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="constellation" aria-label="Four pieces of evidence and one question">
+
+    <figure class="evidence book">
+      <blockquote class="arrive s1">The valencies were suddenly available. Not understood. But available. Which turned out to be enough.</blockquote>
+      <figcaption class="source arrive src"><b>Book</b>What Is Trying To Emerge? · Chapter 5 · Process</figcaption>
+    </figure>
+
+    <figure class="evidence journal">
+      <blockquote class="arrive s3">The pattern was visible long before I understood it.
+        <span class="image">A mountain casting its own triangular shadow across the landscape.</span>
+      </blockquote>
+      <figcaption class="source arrive src"><b>Journal · Field Observation</b>Mount Athos</figcaption>
+    </figure>
+
+    <p class="question arrive last">What keeps showing up?</p>
+
+    <figure class="evidence field">
+      <blockquote class="arrive s4">The garden changed. Did the possibility?</blockquote>
+      <figcaption class="source arrive src"><b>Field Note</b>Luxembourg garden</figcaption>
+    </figure>
+
+    <figure class="evidence reader">
+      <blockquote class="arrive s2">I changed the job, the city and the relationship. The same frustration arrived before I did.</blockquote>
+      <figcaption class="source arrive src"><b>Reader</b>Mumbai</figcaption>
+    </figure>
+
+  </main>
+</body>
+</html>
