@@ -16,3 +16,8 @@ git checkout experiment/reading-room-2-entry
 python3 -m http.server 8000
 ```
 Then open http://localhost:8000/reading-room-2/
+
+- `experiment/the-pair` — *One juxtaposition. The goal is Recognition.*
+  A line from the book (Chapter 5 · Process) beside a Journal field
+  observation (Mount Athos), held by one question. Open `the-pair/index.html`
+  directly in a browser; no server needed.
