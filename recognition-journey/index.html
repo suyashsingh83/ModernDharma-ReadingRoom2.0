@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
   <!--
-    READING ROOM 2.0 — RECOGNITION JOURNEY (branch-only prototype)
+    READING ROOM 2.0 — RECOGNITION JOURNEY · Update 4 (branch-only prototype)
 
-    Threshold → Recognition → Further recognition → The question → Book 1.
+    Threshold → Constellation I–IV → the room goes quiet → the question → Book 1.
     The site shows, places, juxtaposes and invites. It never interprets.
+    The Reading Room is Act I: clues, not conclusions.
 
-    MATERIAL. Every fragment is verbatim from the published site
-    (modern-dharma-site @ 64cd451):
-      Book       — assets/process.pdf, Chapter 5 · Process (published sample)
-      Journal    — _data/journal.yml (inquiries and principles)
-      Field      — _data/journal.yml (the two field observations)
-      Book 1 title, subtitle, Kindle link — _data/book.yml / index.html
-    READER positions are left open on purpose. The only reader quotes on
-    the site sit in the unlinked /map/ prototype and could not be verified.
-    To fill one, put a real, permissioned observation in `text` and its
-    place in `place` (see CONSTELLATIONS below).
+    MATERIAL
+      Book fragments and Investigation Journal questions for Chapters 2, 6, 11,
+      12, 13, 14 and 18 are used exactly as supplied by the author in the
+      "Prototype Update 4" brief. The manuscript itself is not in this
+      repository, so they have not been checked against it here.
+      Chapter 5 (one fragment) is verbatim from the published sample,
+      modern-dharma-site/assets/process.pdf.
+      Field observations are verbatim from modern-dharma-site/_data/journal.yml
+      (the image lines only, not the recognition titles).
+      Not used: Reader material (removed for this prototype) and Chapter 21
+      (it contains answers).
     noindex. No analytics. No storage. No accounts.
   -->
   <meta charset="UTF-8">
@@ -36,7 +38,6 @@
       --ivory: #f0ece3;
       --muted: #aaa59a;
       --line: rgba(202, 163, 60, 0.22);
-      --white-line: rgba(255,255,255,.08);
       --hold: 2600ms;
     }
     @media (prefers-reduced-motion: reduce) { :root { --hold: 800ms; } }
@@ -98,7 +99,7 @@
     }
     .flood.on { opacity: 1; }
 
-    /* ---------- Stages 2–3 · Constellations ---------- */
+    /* ---------- Stages 2–5 · Constellations ---------- */
     .journey { display: none; min-height: 100vh; background: var(--black-soft); }
     .journey.on { display: block; }
     .field {
@@ -117,34 +118,35 @@
     .numeral { grid-column: 1 / -1; grid-row: 2; align-self: center; text-align: center; color: rgba(var(--gold-rgb), .55); }
 
     .piece { display: grid; gap: 1.2rem; align-content: start; }
-    .piece blockquote { font-size: clamp(1.3rem, 2.1vw, 1.75rem); line-height: 1.34; }
-    .piece .image { display: block; margin-top: .75rem; color: var(--muted); font-style: italic; font-size: .82em; line-height: 1.45; }
+    .piece blockquote { font-size: clamp(1.3rem, 2.1vw, 1.75rem); line-height: 1.34; white-space: pre-line; }
+    .piece.journal blockquote { font-style: italic; }
     .piece figcaption {
       font-family: "Inter", Arial, sans-serif; font-size: .58rem; font-weight: 500;
       letter-spacing: .2em; line-height: 1.9; text-transform: uppercase; color: rgba(var(--gold-rgb), .68);
     }
     .piece figcaption b { display: block; font-weight: 500; color: var(--gold); }
-    .piece.open blockquote {
-      height: 2.6rem; border-bottom: 1px dashed rgba(170,165,154,.28);
-    }
-    .piece.open figcaption { color: rgba(170,165,154,.6); }
 
-    /* Three arrangements, so no two constellations sit the same way. */
-    .layout-a .book    { grid-column: 1 / 6;  grid-row: 1; }
-    .layout-a .journal { grid-column: 8 / 13; grid-row: 1; margin-top: 6rem; }
-    .layout-a .field-note { grid-column: 2 / 6; grid-row: 3; }
-    .layout-a .reader  { grid-column: 7 / 12; grid-row: 3; margin-top: 3.5rem; }
+    /* Four arrangements, so no two constellations sit the same way. */
+    .layout-a .p1 { grid-column: 1 / 6;  grid-row: 1; }
+    .layout-a .p2 { grid-column: 8 / 13; grid-row: 1; margin-top: 6rem; }
+    .layout-a .p3 { grid-column: 2 / 6;  grid-row: 3; }
+    .layout-a .p4 { grid-column: 7 / 12; grid-row: 3; margin-top: 3.5rem; }
 
-    .layout-b .reader  { grid-column: 1 / 5;  grid-row: 1; margin-top: 2rem; }
-    .layout-b .book    { grid-column: 6 / 13; grid-row: 1; margin-top: 5rem; }
-    .layout-b .field-note { grid-column: 1 / 7; grid-row: 3; margin-top: 1rem; }
-    .layout-b .journal { grid-column: 8 / 13; grid-row: 3; margin-top: 4rem; }
+    .layout-b .p1 { grid-column: 3 / 9;  grid-row: 1; }
+    .layout-b .p2 { grid-column: 1 / 5;  grid-row: 3; margin-top: 3rem; }
+    .layout-b .p3 { grid-column: 8 / 13; grid-row: 3; }
 
-    .layout-c .journal { grid-column: 2 / 7;  grid-row: 1; }
-    .layout-c .book    { grid-column: 7 / 13; grid-row: 3; }
-    .layout-c .reader  { grid-column: 1 / 5;  grid-row: 3; margin-top: 5rem; }
+    .layout-c .p1 { grid-column: 1 / 5;  grid-row: 1; margin-top: 2rem; }
+    .layout-c .p2 { grid-column: 6 / 13; grid-row: 1; margin-top: 5rem; }
+    .layout-c .p3 { grid-column: 1 / 7;  grid-row: 3; margin-top: 1rem; }
+    .layout-c .p4 { grid-column: 8 / 13; grid-row: 3; margin-top: 4rem; }
 
-    /* The one control. Its words change once: from looking to asking. */
+    .layout-d .p1 { grid-column: 7 / 13; grid-row: 1; }
+    .layout-d .p2 { grid-column: 1 / 6;  grid-row: 1; margin-top: 5rem; }
+    .layout-d .p3 { grid-column: 3 / 8;  grid-row: 3; margin-top: 1rem; }
+    .layout-d .p4 { grid-column: 9 / 13; grid-row: 3; margin-top: 5rem; }
+
+    /* The one control. It only ever offers more looking. */
     .control { width: min(1100px, 100%); margin: 0 auto; padding: 0 6vw 14vh; text-align: center; }
     .next {
       appearance: none; border: 0; background: transparent; padding: 0; cursor: pointer;
@@ -156,40 +158,33 @@
     .next.ready { opacity: 1; pointer-events: auto; }
     .next:hover, .next:focus-visible { color: var(--gold); transform: translateY(2px); outline: none; }
     .next:focus-visible { outline: 1px solid var(--gold); outline-offset: .7rem; }
-    .next.asking {
-      font: 500 clamp(1.8rem, 3.6vw, 2.6rem)/1.1 "Cormorant Garamond", Georgia, serif;
-      letter-spacing: 0; text-transform: none; color: var(--ivory);
-    }
-    .next.asking:hover, .next.asking:focus-visible { color: var(--gold); }
-    .next .arrow { font: 500 .64rem/1 "Inter", Arial, sans-serif; color: var(--gold); }
+    .next .arrow { color: var(--gold); }
 
-    /* ---------- Stage 4 · The question ---------- */
+    /* ---------- Stage 6 · The question ---------- */
     .question, .book-threshold {
       display: none;
       width: min(760px, 100%); margin: 0 auto; padding: 0 6vw; text-align: center;
     }
     .question.on, .book-threshold.on { display: block; }
-    .question { padding-top: 18vh; }
-    .question .q { margin-top: 1.6rem; font-weight: 500; font-size: clamp(2.4rem, 5.4vw, 3.8rem); line-height: 1.04; }
-    .question .tri { display: block; margin-top: 1.8rem; color: var(--gold); font-size: 1.1rem; }
+    .question { padding-top: 34vh; }
+    .question .q { font-weight: 500; font-size: clamp(2.4rem, 5.4vw, 3.8rem); line-height: 1.04; }
 
-    /* ---------- Stage 5 · Book 1 threshold ---------- */
-    .book-threshold { padding-top: 9vh; padding-bottom: 26vh; }
+    /* ---------- Stage 7 · Book 1 threshold ---------- */
+    .book-threshold { padding-top: 16vh; padding-bottom: 26vh; }
     .book-threshold .invite { color: var(--muted); font-size: clamp(1.3rem, 2.4vw, 1.65rem); line-height: 1.5; }
     .book-threshold .title {
-      margin-top: 2.6rem; font-weight: 500; font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: .98; letter-spacing: -.02em;
+      margin-top: 2.4rem; font-weight: 500; font-size: clamp(2.6rem, 6vw, 4.4rem); line-height: .98; letter-spacing: -.02em;
       color: var(--gold);
       background-image: linear-gradient(100deg, #9b7427, #d7b85e 46%, #b8892c 72%, #ead27b);
       background-size: 160% 100%;
       -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
     }
     .book-threshold .sub { margin-top: 1.2rem; color: var(--muted); font-style: italic; font-size: 1.15rem; }
-    .book-threshold .links { margin-top: 3.4rem; display: flex; flex-direction: column; align-items: center; gap: 1.6rem; }
+    .book-threshold .open { margin-top: 3.4rem; }
     .book-threshold a {
       display: inline-flex; gap: .55rem; align-items: center; text-decoration: none;
       color: var(--gold); font: 600 .64rem/1.5 "Inter", Arial, sans-serif; letter-spacing: .16em; text-transform: uppercase;
     }
-    .book-threshold a.quiet { color: rgba(170,165,154,.8); font-weight: 500; }
     .book-threshold a:hover, .book-threshold a:focus-visible { color: #e0bd61; }
 
     @media (max-width: 760px) {
@@ -199,6 +194,7 @@
       .field .piece:nth-of-type(even) { grid-column: 2 / 7 !important; }
       .numeral { grid-row: auto; text-align: left; order: -1; }
       .control { padding: 0 1.4rem 12vh; }
+      .question { padding-top: 30vh; }
     }
   </style>
 </head>
@@ -218,7 +214,7 @@
   </section>
   <div class="flood" id="flood"></div>
 
-  <!-- Stages 2–5 -->
+  <!-- Stages 2–7 -->
   <main class="journey" id="journey">
     <div class="field" id="field" aria-live="polite"></div>
     <div class="control">
@@ -226,64 +222,80 @@
     </div>
 
     <section class="question" id="question" aria-labelledby="q">
-      <p class="label fade" id="q-label">Investigation Journal</p>
       <p class="q fade" id="q" tabindex="-1">Is this a pattern?</p>
-      <span class="tri fade" id="q-tri" aria-hidden="true">△</span>
     </section>
 
-    <section class="book-threshold" id="book" aria-label="The first Modern Dharma investigation">
-      <p class="invite fade" id="b1">If this question interests you,<br>the first Modern Dharma investigation begins here.</p>
+    <section class="book-threshold" id="book" aria-label="The investigation">
+      <p class="invite fade" id="b1">These fragments come from a larger inquiry.</p>
       <p class="title fade" id="b2">What Is Trying<br>To Emerge?</p>
       <p class="sub fade" id="b3">A Modern Dharma Inquiry</p>
-      <div class="links fade" id="b4">
-        <a href="https://moderndharma.life/assets/process.pdf" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">△</span><span>Read Chapter 5, where the book fragments were found</span><span aria-hidden="true">→</span></a>
-        <a class="quiet" href="https://www.amazon.de/dp/B0HNGSR2J2" target="_blank" rel="noopener noreferrer">Read on Kindle <span aria-hidden="true">↗</span></a>
-      </div>
+      <p class="open fade" id="b4">
+        <a href="https://moderndharma.life/#book" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">△</span><span>The investigation</span><span aria-hidden="true">→</span></a>
+      </p>
     </section>
   </main>
 
   <script>
     /* ------------------------------------------------------------
-       The constellations. No themes, no titles, no captions:
-       only what was found, and where it was found.
-       `order` is the sequence in which pieces arrive.
+       The constellations. Clues, not conclusions: moments just
+       before recognition. No themes or captions appear on screen;
+       the working themes below exist only for whoever edits this.
+       A fragment is never placed beside its own chapter's
+       Investigation Journal question.
+       `slot` sets where a piece sits; array order is arrival order.
        ------------------------------------------------------------ */
+    const BOOK = 'Book';
+    const IJ = 'Investigation Journal';
     const CONSTELLATIONS = [
-      {
-        numeral: 'I', layout: 'a', order: ['book', 'field', 'journal', 'reader'],
-        pieces: {
-          book:    { text: 'Not telepathy. Pattern recognition. Most parental emergencies announced themselves long before words arrived.',
-                     source: 'Book', place: 'What Is Trying To Emerge? · Chapter 5 · Process' },
-          journal: { text: 'Why Certainty became less important?', image: 'Not the title. Not the approved version. The movement that keeps returning.',
-                     source: 'Journal · Inquiry', place: '' },
-          field:   { text: 'The pattern was visible long before I understood it.', image: 'A mountain casting its own triangular shadow across the landscape.',
-                     source: 'Field Observation', place: 'Mount Athos' },
-          reader:  { text: null, source: 'Reader', place: 'Not yet contributed' }
-        }
+      { // I · Something keeps returning — "Interesting."
+        numeral: 'I', layout: 'a',
+        pieces: [
+          { slot: 'p1', kind: 'book',    source: BOOK, place: 'Chapter 2 · Fixation',
+            text: 'Nobody asked him to think about it. Nobody was waiting for an answer. Nobody would have noticed if he left it alone.' },
+          { slot: 'p4', kind: 'field',   source: 'Field Observation', place: 'Mount Athos',
+            text: 'A mountain casting its own triangular shadow across the landscape.' },
+          { slot: 'p2', kind: 'book',    source: BOOK, place: 'Chapter 14 · Capacity',
+            text: 'If nobody was watching, what was I becoming capable of?' },
+          { slot: 'p3', kind: 'journal', source: IJ, place: 'Chapter 13',
+            text: 'Why do some responsibilities give energy back?' }
+        ]
       },
-      {
-        numeral: 'II', layout: 'b', order: ['field', 'reader', 'book', 'journal'],
-        pieces: {
-          book:    { text: 'Because the valencies had never really been the problem. They were the missing piece beneath the problem.',
-                     source: 'Book', place: 'What Is Trying To Emerge? · Chapter 5 · Process' },
-          journal: { text: 'The difficult part about waiting.', image: 'What if life is happening while you wait.',
-                     source: 'Journal · Principle', place: '' },
-          field:   { text: 'The garden changed. Or perhaps the possibility was there all along. The work was learning to see it.',
-                     source: 'Field Observation', place: 'The garden' },
-          reader:  { text: null, source: 'Reader', place: 'Not yet contributed' }
-        }
+      { // II · Returning — "Strange."
+        numeral: 'II', layout: 'b',
+        pieces: [
+          { slot: 'p1', kind: 'book',    source: BOOK, place: 'Chapter 11 · Krishna',
+            text: 'I keep ending up in exactly the same place wearing different clothes.' },
+          { slot: 'p3', kind: 'journal', source: IJ, place: 'Chapter 2',
+            text: 'Why did he keep returning?' },
+          { slot: 'p2', kind: 'book',    source: BOOK, place: 'Chapter 6 · Waiting',
+            text: 'What do I actually want?' }
+        ]
       },
-      {
-        // Deliberately the weakest and most ambiguous: no field note, and a
-        // journal entry that pulls against the book fragment rather than echoing it.
-        numeral: 'III', layout: 'c', order: ['journal', 'book', 'reader'],
-        pieces: {
-          book:    { text: 'The valencies were suddenly available. Not understood. But available. Which turned out to be enough.',
-                     source: 'Book', place: 'What Is Trying To Emerge? · Chapter 5 · Process' },
-          journal: { text: 'What if understanding isn’t enough?', image: 'Understanding can reveal every piece and still leave reality unchanged.',
-                     source: 'Journal · Inquiry', place: '' },
-          reader:  { text: null, source: 'Reader', place: 'Not yet contributed' }
-        }
+      { // III · The first answer is not the answer — "Familiar."
+        numeral: 'III', layout: 'c',
+        pieces: [
+          { slot: 'p2', kind: 'book',    source: BOOK, place: 'Chapter 5 · Process',
+            text: '“I’ve been trying to teach chemical bonding.”\n“That was the plan.”\n“Wrong plan.”' },
+          { slot: 'p3', kind: 'book',    source: BOOK, place: 'Chapter 12 · Again',
+            text: 'I already know all this.\nI just don’t move.' },
+          { slot: 'p1', kind: 'journal', source: IJ, place: 'Chapter 6',
+            text: 'What am I waiting for?' },
+          { slot: 'p4', kind: 'book',    source: BOOK, place: 'Chapter 13 · Mirror',
+            text: 'You repeatedly become interested when something stops making sense.' }
+        ]
+      },
+      { // IV · Another way through — "I've seen this."
+        numeral: 'IV', layout: 'd',
+        pieces: [
+          { slot: 'p2', kind: 'field',   source: 'Field Observation', place: 'The garden',
+            text: 'The garden changed.' },
+          { slot: 'p1', kind: 'book',    source: BOOK, place: 'Chapter 18 · Possibility',
+            text: 'It never really felt like his to keep.' },
+          { slot: 'p4', kind: 'journal', source: IJ, place: 'Chapter 19',
+            text: 'What was strength for if not this?' },
+          { slot: 'p3', kind: 'journal', source: IJ, place: 'Chapter 11',
+            text: 'Why do the same questions keep returning?' }
+        ]
       }
     ];
 
@@ -331,25 +343,20 @@
         constellation(0);
       }
 
-      /* ---------- Stages 2–3 · Constellations ---------- */
+      /* ---------- Stages 2–5 · Constellations ---------- */
       const field = $('field'), next = $('next');
-      let index = 0, busy = false;
+      let index = 0, busy = true;
 
-      function piece(kind, data) {
+      function render(item) {
         const fig = document.createElement('figure');
-        fig.className = 'piece ' + (kind === 'field' ? 'field-note' : kind) + (data.text ? '' : ' open');
+        fig.className = 'piece ' + (item.kind === 'field' ? 'field-note' : item.kind) + ' ' + item.slot;
         const q = document.createElement('blockquote');
         q.className = 'fade';
-        if (data.text) {
-          q.textContent = data.text;
-          if (data.image) { const s = document.createElement('span'); s.className = 'image'; s.textContent = data.image; q.append(s); }
-        } else {
-          q.setAttribute('aria-label', 'No reader observation has been contributed here yet.');
-        }
+        q.textContent = item.text;
         const cap = document.createElement('figcaption');
         cap.className = 'fade';
-        const b = document.createElement('b'); b.textContent = data.source;
-        cap.append(b, data.place || '');
+        const b = document.createElement('b'); b.textContent = item.source;
+        cap.append(b, item.place || '');
         fig.append(q, cap);
         return { fig, q, cap };
       }
@@ -360,12 +367,9 @@
         field.className = 'field layout-' + c.layout;
         field.innerHTML = '';
         field.setAttribute('aria-label', 'Constellation ' + c.numeral);
-        const parts = {};
-        for (const kind of ['book', 'journal', 'field', 'reader']) {
-          if (!c.pieces[kind]) continue;
-          parts[kind] = piece(kind, c.pieces[kind]);
-          field.append(parts[kind].fig);
-        }
+        // DOM order follows the slots, so phones read them top to bottom.
+        const rendered = c.pieces.map(item => ({ item, ...render(item) }));
+        [...rendered].sort((a, b) => a.item.slot.localeCompare(b.item.slot)).forEach(r => field.append(r.fig));
         const numeral = document.createElement('p');
         numeral.className = 'label numeral fade';
         numeral.textContent = c.numeral;
@@ -375,59 +379,50 @@
         await wait(700);
         show(numeral);
         await wait(1600);
-        // Each piece arrives on its own; its source follows its words.
-        for (const kind of c.order) {
-          show(parts[kind].q);
-          await wait(1100);
-          show(parts[kind].cap);
-          await wait(1900);
+        // Each clue arrives on its own; where it was found follows.
+        for (const r of rendered) {
+          show(r.q);
+          await wait(1200);
+          show(r.cap);
+          await wait(2000);
         }
-        // Time to look before anything else is offered.
-        const finalOne = i === CONSTELLATIONS.length - 1;
-        await wait(finalOne ? 6000 : 3600);
-        if (finalOne) {
-          next.classList.add('asking');
-          next.querySelector('.t').textContent = 'Is this a pattern?';
-          next.querySelector('.arrow').textContent = '';
-        }
+        await wait(3800);   // time to look before anything else is offered
         next.classList.add('ready');
         busy = false;
       }
 
       next.addEventListener('click', async () => {
         if (busy) return;
+        busy = true;
         next.classList.remove('ready');
+        field.classList.add('leaving');
+        await wait(1200);
         if (index < CONSTELLATIONS.length - 1) {
-          field.classList.add('leaving');
-          await wait(1200);
           field.classList.remove('leaving');
           constellation(++index);
-          return;
+        } else {
+          quiet();
         }
-        ask();
       });
 
-      /* ---------- Stage 4 · The question (asked by the visitor) ---------- */
-      async function ask() {
-        busy = true;
-        next.remove();
-        field.classList.add('leaving');
-        await wait(1400);
+      /* ---------- Stage 6 · The room goes quiet. Then the question. ---------- */
+      async function quiet() {
+        // The visitor asked for more. There is no more evidence; only the question.
         field.remove();
-        const qs = $('question'); qs.classList.add('on');
+        next.parentElement.remove();
         window.scrollTo({ top: 0, behavior: 'auto' });
-        show($('q-label')); await wait(900);
+        await wait(4500);
+        $('question').classList.add('on');
         show($('q')); $('q').focus({ preventScroll: true });
-        await wait(1200); show($('q-tri'));
 
-        /* ---------- Stage 5 · Book 1 threshold ---------- */
-        await wait(6000);   // silence: the question is left alone with the visitor first
-        const book = $('book'); book.classList.add('on');
-        await wait(200);
-        // Keep the question in view: the invitation refers to it.
-        window.scrollTo({ top: Math.max(0, qs.offsetTop + qs.offsetHeight - innerHeight * 0.32), behavior: reduced ? 'auto' : 'smooth' });
-        await wait(900);
-        for (const id of ['b1', 'b2', 'b3', 'b4']) { show($(id)); await wait(id === 'b1' ? 2600 : 1500); }
+        /* ---------- Stage 7 · Book 1 threshold ---------- */
+        await wait(9000);   // leave the question alone
+        $('book').classList.add('on');
+        // Keep the question in view above the invitation that answers to it.
+        const qTop = $('q').getBoundingClientRect().top + scrollY;
+        window.scrollTo({ top: Math.max(0, qTop - innerHeight * 0.14), behavior: reduced ? 'auto' : 'smooth' });
+        await wait(1200);
+        for (const id of ['b1', 'b2', 'b3', 'b4']) { show($(id)); await wait(id === 'b1' ? 2800 : 1600); }
       }
     })();
   </script>
