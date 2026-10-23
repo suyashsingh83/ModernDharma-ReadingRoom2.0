@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    READING ROOM 2.0 — ENTRY EXPERIMENT (branch-only prototype)
+    Not linked from any page. Not in the sitemap. noindex. No analytics.
+    Every sentence on this page already exists elsewhere on moderndharma.life;
+    each trace keeps the source label it carries there.
+    Question under test: what should it feel like to enter?
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The Reading Room | Modern Dharma</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Uses the shared tokens from style.css. Everything below is scoped to rr- classes. */
+    .rr { min-height: 100vh; position: relative; overflow: hidden; isolation: isolate; }
+    .rr-room {
+      width: min(820px, 100%);
+      margin: 0 auto;
+      padding: 16vh 6vw 18vh;
+      position: relative;
+      z-index: 1;
+    }
+    .rr .hero-triangle { right: -29vw; top: 30vh; z-index: -1; opacity: .7; }
+
+    /* The question already on the table */
+    .rr-status {
+      margin: 0 0 2.4rem;
+      color: var(--gold); font-size: .72rem; font-weight: 500; letter-spacing: .22em;
+    }
+    .rr-status span { margin-right: .7rem; }
+    .rr-question {
+      margin: 0;
+      font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500;
+      font-size: clamp(3.1rem, 8vw, 6.4rem); line-height: .92; letter-spacing: -.035em;
+    }
+    .rr-under {
+      margin: 2rem 0 0; color: var(--muted);
+      font-size: .98rem; line-height: 1.9; max-width: 34rem;
+    }
+
+    /* The traces: a ledger, not a grid of cards */
+    .rr-ledger-label {
+      margin: 7rem 0 0; padding-bottom: 1.1rem;
+      color: var(--gold); font-size: .64rem; font-weight: 600; letter-spacing: .16em;
+      border-bottom: 1px solid var(--line);
+    }
+    .rr-ledger { list-style: none; margin: 0; padding: 0; }
+    .rr-trace {
+      display: grid;
+      grid-template-columns: 11.5rem minmax(0, 1fr);
+      gap: 2rem;
+      padding: 2.4rem 0;
+      border-bottom: 1px solid var(--white-line);
+    }
+    .rr-trace[hidden] { display: none; }
+    .rr-trace.is-arriving { animation: rrArrive .9s ease forwards; }
+    @keyframes rrArrive { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+    .rr-source {
+      margin: .55rem 0 0;
+      color: rgba(202,163,60,.78); font-size: .62rem; font-weight: 500;
+      letter-spacing: .16em; line-height: 1.8; text-transform: uppercase;
+    }
+    .rr-source b { display: block; color: var(--gold); font-weight: 600; }
+    .rr-source i { font-style: normal; margin-right: .45rem; }
+    .rr-trace blockquote {
+      margin: 0;
+      color: var(--ivory);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(1.45rem, 2.6vw, 1.9rem); line-height: 1.35;
+    }
+
+    /* The one interaction */
+    .rr-more {
+      appearance: none; border: 0; background: transparent; padding: 0;
+      margin-top: 2.6rem;
+      display: inline-flex; flex-direction: column; align-items: flex-start; gap: .35rem;
+      color: rgba(202,163,60,.85); cursor: pointer;
+      font: 500 .64rem/1.4 "Inter", Arial, sans-serif; letter-spacing: .24em;
+      transition: color .2s ease, transform .2s ease;
+    }
+    .rr-more .rr-q {
+      font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.55rem;
+      letter-spacing: 0; color: var(--ivory); font-weight: 500;
+      transition: color .2s ease;
+    }
+    .rr-more:hover, .rr-more:focus-visible { transform: translateY(2px); outline: none; }
+    .rr-more:hover .rr-q, .rr-more:focus-visible .rr-q { color: var(--gold); }
+    .rr-more:focus-visible { outline: 1px solid var(--gold); outline-offset: .6rem; }
+
+    /* What the evidence does not yet settle */
+    .rr-open { margin-top: 7rem; display: none; }
+    .rr-open.is-visible { display: block; animation: rrArrive 1.1s ease forwards; }
+    .rr-caveat {
+      margin: 0; color: var(--muted); font-size: .98rem; line-height: 1.9; max-width: 36rem;
+    }
+    .rr-caveat strong { color: var(--ivory); font-weight: 500; }
+    .rr-next {
+      margin: 3rem 0 0;
+      font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500;
+      font-size: clamp(2.2rem, 4.4vw, 3.4rem); line-height: 1.05;
+    }
+    .rr-pair {
+      margin: 5rem 0 0; padding-top: 2.4rem; border-top: 1px solid var(--line);
+      display: grid; gap: .35rem;
+      font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.55rem; line-height: 1.4;
+    }
+    .rr-pair span { color: var(--muted); }
+    .rr-pair strong { font-weight: 500; }
+    .rr-contribute { margin: 2rem 0 0; }
+    .rr-contribute a {
+      display: inline-flex; gap: .55rem; align-items: center;
+      color: var(--gold); text-decoration: none;
+      font-size: .64rem; font-weight: 600; letter-spacing: .16em;
+    }
+    .rr-contribute a:hover, .rr-contribute a:focus-visible { color: #e0bd61; }
+    .rr-remains {
+      margin: 6rem 0 0; text-align: center;
+      color: var(--muted); font-size: .64rem; letter-spacing: .24em;
+    }
+    .rr-remains span { display: block; color: var(--gold); font-size: 1.2rem; letter-spacing: 0; margin-bottom: 1.4rem; }
+
+    @media (max-width: 760px) {
+      .rr-room { padding: 11vh 1.25rem 14vh; }
+      .rr-trace { grid-template-columns: 1fr; gap: .9rem; padding: 2rem 0; }
+      .rr-source { margin: 0; }
+      .rr-source b { display: inline; margin-right: .5rem; }
+      .rr .hero-triangle { width: 120vw; right: -70vw; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .rr-trace.is-arriving, .rr-open.is-visible { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="topbar" aria-label="Main navigation">
+    <a class="brand" href="https://moderndharma.life/">MODERN DHARMA</a>
+  </nav>
+
+  <main class="rr">
+    <div class="hero-triangle" aria-hidden="true"></div>
+
+    <div class="rr-room">
+      <p class="rr-status"><span aria-hidden="true">△</span>THE READING ROOM · AN ONGOING INQUIRY</p>
+
+      <h1 class="rr-question">What keeps<br><span class="gold-leaf-text">showing up?</span></h1>
+      <p class="rr-under">This question is currently under examination. Evidence has been gathering from different notebooks. Nothing here is settled.</p>
+
+      <p class="rr-ledger-label">EVIDENCE GATHERED SO FAR</p>
+      <ol class="rr-ledger" id="ledger" aria-live="polite">
+        <!-- Already on the table when you arrive: the investigation began before you did. -->
+        <li class="rr-trace">
+          <p class="rr-source"><b><i aria-hidden="true">○</i>Reader</b>Mumbai</p>
+          <blockquote>I changed the job, the city and the relationship. The same frustration arrived before I did.</blockquote>
+        </li>
+        <li class="rr-trace" hidden>
+          <p class="rr-source"><b>Book</b>Chapter 26 · Recognition</p>
+          <blockquote>The investigation had never been about discovering something hidden. It had been about learning to trust something visible.</blockquote>
+        </li>
+        <li class="rr-trace" hidden>
+          <p class="rr-source"><b><i aria-hidden="true">○</i>Field Observation</b>Mount Athos</p>
+          <blockquote>The pattern was visible long before I understood it.</blockquote>
+        </li>
+        <li class="rr-trace" hidden>
+          <p class="rr-source"><b><i aria-hidden="true">○</i>Reader</b>Singapore</p>
+          <blockquote>The promotion arrived. The question stayed.</blockquote>
+        </li>
+        <li class="rr-trace" hidden>
+          <p class="rr-source"><b><i aria-hidden="true">△</i>Journal · Inquiry</b>What if the pattern is the answer?</p>
+          <blockquote>Different people. Different places. The same recurring pull beneath them.</blockquote>
+        </li>
+      </ol>
+
+      <button class="rr-more" id="more" type="button" aria-controls="ledger">
+        <span class="rr-q">What else has been noticed?</span>
+        <span aria-hidden="true">↓</span>
+      </button>
+
+      <section class="rr-open" id="open" aria-labelledby="rr-next">
+        <p class="rr-caveat"><strong>The evidence is not yet conclusive.</strong> Repetition may also reflect conditioning, trauma, compulsion, social expectation, or necessity. Evidence must be interpreted, not merely collected.</p>
+        <h2 class="rr-next" id="rr-next">What else could explain it?</h2>
+
+        <p class="rr-pair">
+          <span>Not: What do you think?</span>
+          <strong class="gold-leaf-text gold-leaf-text-subtle">But: What have you noticed?</strong>
+        </p>
+        <p class="rr-contribute">
+          <a href="https://moderndharma.life/other-notebooks/"><span aria-hidden="true">△</span><span>ADD AN OBSERVATION TO THE EVIDENCE</span><span aria-hidden="true">→</span></a>
+        </p>
+
+        <p class="rr-remains"><span aria-hidden="true">△</span>THE INVESTIGATION REMAINS OPEN</p>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      const more = document.getElementById('more');
+      const open = document.getElementById('open');
+      if (!more || !open) return;
+
+      // One interaction: each press lays one more trace on the table.
+      // There is no count and no progress; the visitor only learns there is
+      // no more when the evidence stops and the question widens instead.
+      more.addEventListener('click', () => {
+        const next = document.querySelector('.rr-trace[hidden]');
+        if (next) {
+          next.hidden = false;
+          next.classList.add('is-arriving');
+        } else {
+          // Asked once more after the last trace: the answer is a wider question.
+          more.remove();
+          open.classList.add('is-visible');
+          document.getElementById('rr-next').setAttribute('tabindex', '-1');
+          setTimeout(() => open.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }), 300);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
